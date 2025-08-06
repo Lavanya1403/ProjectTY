@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    line-height: normal;
+}
+
+body {
+    background-color: #080808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90vw; /* Scaled down to 90% of viewport width */
+    height: 90vh; /* Scaled down to 90% of viewport height */
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+
+main.clouds {
+    background-image: url('../img/cloudy.jpeg');
+}
+
+main.sunny {
+    background-image: url('../img/sunny.jpeg');
+}
+
+main.overcast {
+    background-image: url('../img/overcast.jpeg');
+}
+
+main.mist,
+main.Mist,
+main.haze,
+main.smoke {
+    background-image: url('../img/mist.jpeg');
+}
+
+main.rain {
+    background-image: url('../img/rain.jpeg');
+}
+
+main.snow {
+    background-image: url('../img/snow.jpeg');
+}
+
+main.sleet {
+    background-image: url('../img/sleet.jpeg');
+}
+
+main.drizzle {
+    background-image: url('../img/drizzle.jpeg');
+}
+
+main.thunder,
+main.thundery {
+    background-image: url('../img/thunder.jpeg');
+}
+
+main.blizzard {
+    background-image: url('../img/blizzard.jpeg');
+}
+
+main.fog {
+    background-image: url('../img/fog.jpeg');
+}
+
+main.ice {
+    background-image: url('../img/ice.jpeg');
+}
+
+main.shower {
+    background-image: url('../img/shower.jpeg');
+}
+
+main.showers {
+    background-image: url('../img/showers.jpeg');
+}
+
+main.clear {
+    background-image: url('../img/clear.jpeg');
+}
+
+/* Input */
+.search-container {
+    width: 90%; /* Decreased width by 10% */
+    padding-bottom: 6px;
+    margin-bottom: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ffffff;
+}
+
+.geo-input {
+    all: unset;
+    flex: 1;
+    width: 90%; /* Decreased width by 10% */
+    margin: 0 10px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 11.7px; /* Decreased font size by 10% */
+}
+
+.geo-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-button {
+    border: none;
+    background: transparent;
+    animation: none;
+    -webkit-animation: none;
+    height: 19.8px; /* Decreased height by 10% */
+    cursor: pointer;
+}
+
+/* Day Stats */
+.day-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px; /* Decreased gap by 10% */
+    margin-top: 36px; /* Decreased margin by 10% */
+    width: 90%;
+}
+
+.day-stats__temperature {
+    color: #fff;
+    font-size: 45px; /* Decreased font size by 10% */
+    font-weight: 400;
+}
+
+.day-stats__feelslike {
+    color: #fff;
+    font-size: 16.2px; /* Decreased font size by 10% */
+    font-weight: 300;
+}
+
+.day-stats_condation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px; /* Decreased gap by 10% */
+    margin-top: 27px; /* Decreased margin by 10% */
+    width: 90%;
+    list-style: none;
+    padding: 0;
+}
+
+.day-stats_condation li {
+    text-align: center;
+}
+
+.day-stats_condition {
+    color: #fff;
+    font-size: 23.4px; /* Decreased font size by 10% */
+    font-weight: 500;
+}
+
+.day-stats__condition_text {
+    color: #fff;
+    font-size: 12.6px; /* Decreased font size by 10% */
+    font-weight: 300;
+}
+
+/* Main Container */
+.main-container {
+    position: relative;
+    width: 90%; /* Decreased width by 10% */
+    height: 90vh; /* Decreased height by 10% */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 67.5px; /* Decreased padding by 10% */
+    box-sizing: border-box;
+}
+
+.side-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 225px; /* Decreased width by 10% */
+    padding: 36px 18px; /* Decreased padding by 10% */
+    height: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20.25px); /* Decreased blur by 10% */
+    box-sizing: border-box;
+}
+
+.secondary-title {
+    margin-bottom: 15.3px; /* Decreased margin by 10% */
+    color: #fff;
+    font-size: 11.7px; /* Decreased font size by 10% */
+}
+
+.weather__primary-title {
+    margin-bottom: 14.4px; /* Decreased margin by 10% */
+    color: #fff;
+    font-size: 34.2px; /* Decreased font size by 10% */
+    line-height: 100%;
+    letter-spacing: -1.71px; /* Decreased letter spacing by 10% */
+}
+
+.weather__location {
+    display: flex;
+    align-items: center;
+    margin-bottom: 23.4px; /* Decreased margin by 10% */
+}
+
+.location-icon {
+    margin-right: 7.2px; /* Decreased margin by 10% */
+    margin-bottom: 6.3px; /* Decreased margin by 10% */
+}
+
+.weather__location-text {
+    color: #fff;
+    font-size: 11.7px; /* Decreased font size by 10% */
+}
+
+.weather__primary-stats {
+    width: 324px; /* Decreased width by 10% */
+    color: #fff;
+    font-size: 11.7px; /* Decreased font size by 10% */
+    margin-bottom: 72px; /* Decreased margin by 10% */
+}
+
+/* Forecast Stats */
+.forecast {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    list-style: none;
+}
+
+.forecast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forecast-time {
+    color: #fff;
+    font-size: 12.6px; /* Decreased font size by 10% */
+    margin-bottom: 3.6px; /* Decreased margin by 10% */
+}
+
+.forecastwindText {
+    color: #fff;
+    font-size: 10.8px; /* Decreased font size by 10% */
+    margin-bottom: 9px; /* Decreased margin by 10% */
+}
+
+.forecast-temperature {
+    color: #fff;
+    font-size: 36px; /* Decreased font size by 10% */
+    font-weight: 300;
+    line-height: 100%;
+}
+
+#chart {
+    margin: 27px auto 27px; /* Decreased margin by 10% */
+    width: 90%; /* Decreased width by 10% */
+}
+
+/* Responsive Design for Weather App */
+@media screen and (max-width: 1100px) {
+    main {
+        width: 90vw; /* Decreased width by 10% */
+        height: 90vh; /* Decreased height by 10% */
+    }
+
+    .side-container {
+        width: 90%; /* Decreased width by 10% */
+    }
+
+    .geo-input {
+        font-size: 9px; /* Decreased font size by 10% */
+    }
+
+    .day-stats__temperature {
+        font-size: 36px; /* Decreased font size by 10% */
+    }
+
+    .day-stats_condition {
+        font-size: 18px; /* Decreased font size by 10% */
+    }
+
+    .day-stats__condition_text {
+        font-size: 9px; /* Decreased font size by 10% */
+    }
+
+    .forecast-time {
+        font-size: 10.8px; /* Decreased font size by 10% */
+    }
+
+    .forecastwindText {
+        font-size: 9px; /* Decreased font size by 10% */
+        text-align: center;
+    }
+
+    .forecast-temperature {
+        font-size: 19.8px; /* Decreased font size by 10% */
+        margin-bottom: 9px; /* Decreased margin by 10% */
+    }
+}
+
+/* For smaller screens like mobile phones */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column; /* Stack the content vertically */
+        align-items: center; /* Center elements */
+    }
+
+    .side-container {
+        width: 90%; /* Decreased width by 10% */
+        padding: 18px; /* Decreased padding by 10% */
+    }
+
+    .day-stats__temperature {
+        font-size: 32.4px; /* Decreased font size by 10% */
+    }
+
+    .forecast-temperature {
+        font-size: 27px; /* Decreased font size by 10% */
+    }
+
+    .geo-input {
+        font-size: 10.8px; /* Decreased font size by 10% */
+    }
+
+    .weather__primary-title {
+        font-size: 25.2px; /* Decreased font size by 10% */
+    }
+
+    .forecast-item {
+        width: 90%;
+        margin: 9px 0; /* Decreased margin by 10% */
+    }
+}
+
+/* For very small devices like mobile phones */
+@media screen and (max-width: 480px) {
+    main {
+        width: 90vw; /* Decreased width by 10% */
+        height: 90vh; /* Decreased height by 10% */
+    }
+
+    .side-container {
+        width: 90%;
+        padding: 9px; /* Decreased padding by 10% */
+    }
+
+    .day-stats__temperature {
+        font-size: 25.2px; /* Decreased font size by 10% */
+    }
+
+    .forecast-temperature {
+        font-size: 19.8px; /* Decreased font size by 10% */
+    }
+}
+
+.map-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 12px;
+    border: 1px solid white;
+    border-radius: 6px;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: background-color 0.3s ease;
+}
+
+.map-button:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #FFD700;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --button-bg: #4CAF50;
+            --button-hover: #45a049;
+            --map-button-bg: #2196F3;
+            --map-button-hover: #0b7dda;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated background elements */
+        .weather-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .sun {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0) 70%);
+            border-radius: 50%;
+            animation: pulse 8s infinite alternate;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            filter: blur(5px);
+        }
+        
+        .cloud-1 {
+            top: 20%;
+            left: 10%;
+            width: 80px;
+            height: 40px;
+            animation: float 15s infinite linear;
+        }
+        
+        .cloud-2 {
+            top: 30%;
+            right: 15%;
+            width: 120px;
+            height: 60px;
+            animation: float 20s infinite linear reverse;
+        }
+        
+        .cloud-3 {
+            bottom: 25%;
+            left: 20%;
+            width: 100px;
+            height: 50px;
+            animation: float 18s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(50px) translateY(-10px); }
+            50% { transform: translateX(100px) translateY(0); }
+            75% { transform: translateX(50px) translateY(10px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            width: 95%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, #f5f5f5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        button {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        button:hover {
+            background: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .map-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            background: var(--map-button-bg);
+            text-decoration: none;
+            color: white;
+            padding: 16px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+        
+        .map-btn:hover {
+            background: var(--map-button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            input, button, .map-btn {
+                padding: 14px 20px;
+            }
+            
+            .sun {
+                width: 80px;
+                height: 80px;
+                right: 10%;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .container {
+                padding: 25px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            .logo {
+                font-size: 3rem;
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Ripple effect for buttons */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: .3;
+            transition: 0s;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-bg">
+        <div class="sun"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+    </div>
+    
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-cloud-sun"></i>
+        </div>
+        <h1>Weather Forecast</h1>
+        
+        <form method="POST" action="{% url 'weather' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="city" placeholder="Enter city name..." required>
+            </div>
+            <button type="submit" class="ripple">
+                <i class="fas fa-cloud-sun-rain"></i> Get Weather
+            </button>
+        </form>
+        
+        <a href="{% url 'map' %}" class="map-btn ripple"> 
+            <i class="fas fa-map-marked-alt"></i> View Weather Map
+        </a>
+    </div>
+
+    <script>
+        // Add dynamic background based on time of day
+        document.addEventListener('DOMContentLoaded', function() {
+            const hour = new Date().getHours();
+            const body = document.body;
+            const sun = document.querySelector('.sun');
+            const logo = document.querySelector('.logo i');
+            
+            // Change theme based on time of day
+            if (hour >= 6 && hour < 18) {
+                // Daytime
+                body.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
+                sun.style.display = 'block';
+            } else {
+                // Nighttime
+                body.style.background = 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)';
+                sun.style.display = 'none';
+                logo.className = 'fas fa-moon';
+            }
+            
+            // Add ripple effect to buttons
+            const buttons = document.querySelectorAll('.ripple');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+                    
+                    const ripples = document.createElement('span');
+                    ripples.style.left = `${x}px`;
+                    ripples.style.top = `${y}px`;
+                    this.appendChild(ripples);
+                    
+                    setTimeout(() => {
+                        ripples.remove();
+                    }, 1000);
+                    
+                    // If it's a form submit button, submit the form after animation
+                    if (this.type === 'submit') {
+                        setTimeout(() => {
+                            this.closest('form').submit();
+                        }, 300);
+                    } else if (this.href) {
+                        // If it's a link, navigate after animation
+                        setTimeout(() => {
+                            window.location.href = this.href;
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
